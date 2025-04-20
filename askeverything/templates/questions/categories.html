@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+    
+    <link rel="stylesheet" href="{% static 'questions/categories.css' %}">
+
+</head>
+<body bgcolor="#e0e4e8">
+    {% for category in categories %}
+        <h4><a href="/questions/{{category.pk}}/">{{ category.pk }}.{{ category.name }}</a></h4>
+    {% endfor %}
+
+    <h4><a href="/questions/categories/create/">create</a></h4>
+
+    <script>
+        let element = document.getElementById("createbtn");
+        element.style.left = "615px";
+        element.style.top = `${document.getElementsByTagName("h4").length * 50}px`;
+    </script>
+
+</body>
+</html>

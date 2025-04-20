@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login or signup</title>
+    <link rel="stylesheet" href="{% static 'accounts/login-or-signup.css' %}">
+</head>
+<body bgcolor="#e0e4e8">
+    <div class="container">
+        <div class="box">
+            <h1 id="info">Already have an account in 'askeverything' website?</h1>
+            <button id="loginButton" onclick="login()">login</button>
+            <button id="signupButton" onclick="signup()">signup</button>
+        </div>
+        
+        <div class="signupForm">
+            <h1 style="position: absolute;left: 486px;top: 185px;">Sign Up</h1>
+            <form action="/accounts/signup/" method="POST" id="signup-form">
+                {% csrf_token %}
+                {% for field in signupForm %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                {% endfor %}
+                <input id="signupbtn" type="submit" value="Sign Up">
+            </form>
+        </div>
+        
+        <div class="loginForm">
+            <h1 style="position: absolute;left: 836px;top: 228px;">Log in</h1>
+            <form action="/accounts/signup/" method="POST" id="signup-form">
+                {% csrf_token %}
+                {% for field in loginForm %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                {% endfor %}
+                <input id="loginbtn" type="submit" value="Login">
+            </form>
+        </div>
+        
+    </div>
+
+    <script src="{% static 'accounts/login-or-signup.js' %}"></script>
+    <script src="{% static 'accounts/signup-form.js' %}"></script>
+    <script src="{% static 'accounts/login-form.js' %}"></script>
+    
+</body>
+</html>

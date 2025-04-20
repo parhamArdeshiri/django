@@ -1,0 +1,81 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question {{ question.pk }}</title>
+
+    <style>
+                            .q{
+            background-color: #3498db;
+            border-radius: 10px;
+            border: 0 solid rgb(0, 0, 0);
+            width: 500px;
+            height: 130px;
+            margin-top: 5px;
+            margin-left: 445px;
+        }.Answer0{
+                        background-color: #3498db;
+                        border-radius: 10px;
+                        border: 0 solid rgb(0, 0, 0);
+                        width: 500px;
+                        height: 25px;
+                        margin-top: 50px;
+                        margin-left: 445px;
+                    }.Answer1{
+                        background-color: #3498db;
+                        border-radius: 10px;
+                        border: 0 solid rgb(0, 0, 0);
+                        width: 500px;
+                        height: 25px;
+                        margin-top: 50px;
+                        margin-left: 445px;
+                    }
+                            </style>
+    
+</head>
+<body bgcolor="#ecf0f1">
+    <div class="q">
+        <h2 id="title">title:{{question.title}}</h2>
+        <h1 id="text">text: </h1>
+        <br>
+
+        <div class="Q">
+            <h4>
+                {% for line in LinedQuestion %}
+                    {{ line }} <br>
+                {% endfor %}
+            </h4>
+        </div>
+            
+        <h5 id="ct" style="position: absolute;left: 690px;top: 90px;">created time: {{question.created_time}}</h5>
+    </div>
+
+    
+    {% for text in LinedAnswers %}
+        <h4>
+            <div class="Answer{{ forloop.counter0 }}">
+                        
+    
+                    {% for line in text %}
+                        <span style="white-space: pre;">  {{ line }}</span>
+                    {% endfor %}
+                
+                <br>
+                <h6>{{ answer.created_time }}</h6>
+            </div>
+        </h4>
+    {% endfor %}
+
+    <form action="/questions/{{ question.pk }}/answers/add" method="GET">
+
+            <input type="submit" value="Add answer" style="position: absolute;left: 677px;top: 299px;width: 85px;height: 30px;background-color: #3498db;border-radius: 10px;border: 0 solid black;">
+
+    </form>
+
+    <script src="{% static 'questions/asked-question.js' %}"></script>
+
+</body>
+</html>
